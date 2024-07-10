@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat Program</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 20px;
+    }
+    .chat-box {
+        width: 300px;
+        height: 400px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        overflow-y: scroll;
+        margin-bottom: 10px;
+    }
+    .input-area {
+        display: flex;
+        margin-bottom: 10px;
+    }
+    .input-area input[type="text"], .input-area input[type="number"] {
+        flex: 1;
+        padding: 8px;
+        margin-right: 5px;
+        border: 1px solid #ccc;
+    }
+    .input-area input[type="submit"] {
+        padding: 8px 15px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <div class="input-area">
+        <input type="text" id="usernameInput" placeholder="Enter your username..." pattern="\d*" title="Username must be a number">
+        <input type="text" id="messageInput" placeholder="Type your message...">
+        <input type="submit" value="Send" onclick="sendMessage()">
+    </div>
+    <div class="chat-box" id="chatLog">
+        <!-- This is where messages will appear -->
+    </div>
+
+    <script>
+        function sendMessage() {
+            var username = document.getElementById("usernameInput").value;
+            var message = document.getElementById("messageInput").value;
+
+            // Validate username input
+            if (!username) {
+                alert("Please enter a username.");
+                return;
+            }
+
+            // Validate message input
+            if (!message.trim()) {
+                alert("Please enter a message.");
+                return;
+            }
+
+            // Create message element
+            var chatLog = document.getElementById("chatLog");
+            var messageElement = document.createElement("p");
+            messageElement.textContent = username + ": " + message;
+            chatLog.appendChild(messageElement);
+
+            // Clear message input
+            document.getElementById("messageInput").value = "";
+
+            // Scroll to bottom of chat box
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+    </script>
+</body>
+</html>
